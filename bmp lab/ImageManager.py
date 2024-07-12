@@ -64,7 +64,8 @@ class ImageManager:
         global data
         for y in range(height):
             for x in range(width):
-                data[x, y, 0], data[x, y, 1], data[x, y, 2] = (int)(data[x, y, 0] + data[x, y, 1] + data[x, y, 2]) / 3
+                avg = (int)(data[x, y, 0] + data[x, y, 1] + data[x, y, 2]) / 3
+                data[x, y, 0], data[x, y, 1], data[x, y, 2] = avg, avg, avg
 
     def restoreToOriginal(self):
         global data
