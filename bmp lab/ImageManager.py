@@ -27,7 +27,7 @@ class ImageManager:
         mode_to_bpp = {"1":1,"L":8,"P":8,"RGB":24,"RGBA":32,"CMYK":32,"YCbCr":24,"LAB":24,"HSV":24,"I":32,"F":32}
         bitDepth = mode_to_bpp[img.mode]
 
-        print("Image %s with %s x %s pixels (%s bits per pixels) has been read!" % (img.file-name, width, height, bitDepth))
+        print("Image %s with %s x %s pixels (%s bits per pixels) has been read!" % (img.filename, width, height, bitDepth))
 
     def write(self, fileName):
         global img 
@@ -38,3 +38,35 @@ class ImageManager:
             print("Write file error")
         else:
             print("Image %s has been written!" %(fileName))
+
+    def convertToRed(self):
+        global data
+        for y in range(height):
+            for x in range(width):
+                data[x, y, 1] = 0
+                data[x, y, 2] = 0
+
+    def convertToGreen(self):
+        global data
+        for y in range(height):
+            for x in range(width):
+                data[x, y, 0] = 0
+                data[x, y, 2] = 0
+
+    def convertToBlue(self):
+        global data
+        for y in range(height):
+            for x in range(width):
+                data[x, y, 0] = 0
+                data[x, y, 1] = 0
+
+    def convertToGray(self):
+        global data
+        for y in range(height):
+            for x in range(width):
+                avg = (int)(data[x, y, 0] + data[x, y, 1] + data[x, y, 2]) / 3
+                data[x, y, 0], data[x, y, 1], data[x, y, 2] = avg, avg, avg
+
+    def restoreToOriginal(self):
+        global data
+        data = np.copy(original)
