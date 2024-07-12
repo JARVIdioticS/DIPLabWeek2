@@ -26,4 +26,7 @@ from ImageManager import ImageManager
 
 im = ImageManager()
 
-im.read("images/mandril.bmp")
+im.read("Image-processing-labs/bmp lab/mandril.bmp")
+
+im.convertToGray()
+im.write("Image-processing-labs/bmp lab/gray1.bmp")
